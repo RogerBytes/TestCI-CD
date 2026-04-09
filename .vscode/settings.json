@@ -1,0 +1,4 @@
+{
+    "php.suggest.basic": false,
+    "cSpell.words": ["healthcheck", "isready", "mailpit", "postgresql"]
+}
