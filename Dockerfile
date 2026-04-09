@@ -7,6 +7,8 @@ RUN a2enmod rewrite
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/html
 COPY . .
-RUN composer install --no-dev --optimize-autoloader
+# RUN composer install --no-dev --optimize-autoloader
+RUN composer install --no-dev --optimize-autoloader --no-scripts
+RUN php bin/console cache:clear --env=prod
 RUN chown -R www-data:www-data /var/www/html/var
 EXPOSE 80
