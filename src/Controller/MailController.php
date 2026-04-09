@@ -17,8 +17,7 @@ final class MailController extends AbstractController
             ->from('demo@example.com')
             ->to('test@exemple')
             ->subject('Bonjour depuis Symfo')
-            ->text('Ceci est un email de test')
-            ->html('<h2>Salut</h2>');
+            ->text('Ceci est un email de test');
 
         $mailer->send($email);
 
