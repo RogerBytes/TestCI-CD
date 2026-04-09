@@ -2,7 +2,7 @@ name: Symfony CI/CD
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
 jobs:
   build-and-test:
@@ -36,7 +36,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.3"
+          php-version: '8.3'
 
       - name: Install dependencies
         run: composer install --no-interaction --prefer-dist
@@ -47,16 +47,18 @@ jobs:
   docker-build-push:
     runs-on: ubuntu-latest
     needs: build-and-test
+
     steps:
       - uses: actions/checkout@v4
-      - uses: docker/login-action@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: true
-          tags: |
-            tonpseudo/mailer:latest
-            tonpseudo/mailer:${{ github.sha }}
+          password: ${{ secrets.DOCKERHIB_TOKEN }}
+
+      - name: Build Docker image
+        run: docker build -t kerfiguetteboutman525/mailercicd:latest .
+
+      - name: Push Docker image
+        run: docker push kerfiguetteboutman525/mailercicd:latest
