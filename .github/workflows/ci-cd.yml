@@ -58,7 +58,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build Docker image
-        run: docker build -t RogerBytes/TestCI-CD:latest .
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/test-cicd:latest .
 
       - name: Push Docker image
-        run: docker push RogerBytes/TestCI-CD:latest
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/test-cicd:latest
