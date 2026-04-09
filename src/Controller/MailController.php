@@ -8,6 +8,8 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Attribute\Route;
 
+
+
 final class MailController extends AbstractController
 {
     #[Route('/send-mail', name: 'send_mail')]
@@ -15,12 +17,12 @@ final class MailController extends AbstractController
     {
         $email = (new Email())
             ->from('demo@example.com')
-            ->to('test@exemple')
-            ->subject('Bonjour depuis Symfo')
-            ->text('Ceci est un email de test');
+            ->to('test@exemple.com')
+            ->subject('Bonjour depuis Symfony !')
+            ->text('Ceci est un email de test.');
 
         $mailer->send($email);
 
-        return new Response("Mail envoyé");
+        return new Response("✅ Email envoyé... !");
     }
 }
